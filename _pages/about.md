@@ -1,5 +1,0 @@
-I am an aspiring Computational Linguist in my third year as an undergraduate student at Tulane University. My majors are Linguistics and Computer Science, with a minor in Gender and Sexuality Studies. I love to read, develop connections, and learn languages. I'm currently working on achieving spoken fluency in Twi (native comprehension) and Japanese (intermediate)!
-
-Being a first-generation college student has inspired me to ensure equitable and adequate representation for all communities. I am guided by the experience of my social work regarding the LGBTQ+ community, in leadership positions on campus and volunteering at home, and I understand the necessity for technology to be accountable. Accessibility and accountability is a significant focus in my current internship as a Digital Research Intern.
-
-I have experience with Python, Pandas, NumPy, Matplotlib, web development, teaching, and fostering community growth. Considering the intersections of my interests, I am seeking internships in Data Analysis, UX Research and Writing, Natural Language Processing, Artificial Intelligence, and Machine Learning. 
