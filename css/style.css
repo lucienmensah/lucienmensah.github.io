@@ -177,14 +177,15 @@ nav {
 
 #content { 
   text-align: justify;
-  width: 844px;
+  width: 444px;
   padding: 0 0 5px 30px;
   margin: 0;
   float: left;
 }
+
 #fullcontent { 
   text-align: justify;
-  width: 444px;
+  width: 844px;
   padding: 0 0 5px 30px;
   margin: 0;
   float: left;
