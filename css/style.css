@@ -161,6 +161,13 @@ nav {
   border-bottom: 0;
 } 
 
+#blog_container2 { 
+  float: left;
+  width: 450px;
+  padding: 0;
+  height: 900px;
+}
+
 #sidebar_container { 
   float: left;
   width: 450px;
