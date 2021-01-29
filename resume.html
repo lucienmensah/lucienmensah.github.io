@@ -2,10 +2,30 @@
 <html>
   <head>
     <title>Lucien's Resume</title>
-  </head>
-  <body>
-    <h1>How to disable downloading of the PDF document</h1>
-    <iframe src="images/Mensah_Resume.pdf#toolbar=0" width="100%" height="100%">
-    </iframe>
-  </body>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.bg {
+  /* The image used */
+  background-image: images/Mensah_Resume.pdf#toolbar=0;
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+</body>
 </html>
