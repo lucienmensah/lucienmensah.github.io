@@ -120,10 +120,10 @@ header {
 
 #logo { 
   width: 220px;
-  float: right;
+  float: left;
   height: 100px;
   background: transparent;
-  padding: 0 0 10px 10px;
+  padding: 0 20px 10px 10px;
 }
 
 #logo h1 { 
