@@ -176,7 +176,7 @@ nav {
 }
 
 #content { 
-  text-align: right;
+  text-align: left;
   width: 444px;
   padding: 0 0 5px 30px;
   margin: 0;
@@ -184,7 +184,7 @@ nav {
 }
 
 #fullcontent { 
-  text-align: right;
+  text-align: left;
   width: 844px;
   padding: 0 0 5px 30px;
   margin: 0;
