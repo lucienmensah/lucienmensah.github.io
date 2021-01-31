@@ -260,6 +260,10 @@ footer a:hover {
   text-decoration: underline;
 }
 
+footer img {
+  margin-left: 10px;
+  margin-right: 10px;
+}
 /* form styling */
 .form_settings { 
   margin: 0;
