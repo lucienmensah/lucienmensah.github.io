@@ -32,6 +32,8 @@ p {
 
 img { 
   border: 0;
+  max-width: 100%;  
+  display: block;
 }
 
 h1, h2, h3, h4, h5, h6 { 
@@ -149,6 +151,7 @@ nav {
   margin: 1px auto 0 auto;
   float: right;
   padding: 35px 0 0 0;
+  max-width: 100%;  
 } 
 
 #site_content { 
@@ -181,6 +184,7 @@ nav {
   padding: 0 0 5px 30px;
   margin: 0;
   float: left;
+  max-width: 100%;
 }
 
 #fullcontent { 
@@ -189,6 +193,7 @@ nav {
   padding: 0 0 5px 30px;
   margin: 0;
   float: left;
+  max-width: 100%;
 }
 
 #content ul { 
@@ -244,6 +249,7 @@ footer {
   text-align: center; 
   color: #222;
   background: #D4D4D4;
+  max-width: 100%;
 }
 
 footer p { 
@@ -265,6 +271,7 @@ footer img {
   width: 40px;
   margin-left: 10px;
   margin-right: 10px;
+  max-width: 100%;
 }
 /* form styling */
 .form_settings { 
