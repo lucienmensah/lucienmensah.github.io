@@ -15,7 +15,8 @@ html {
 
 /* tell the browser to render HTML 5 elements as block */
 article, aside, figure, footer, header, hgroup, nav, section { 
-  display:block;
+  max-width: 100%;  
+  display: block;
 }
 
 body { 
