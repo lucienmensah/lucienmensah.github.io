@@ -34,7 +34,6 @@ p {
 img { 
   border: 0;
   max-width: 100%;  
-  display: block;
 }
 
 h1, h2, h3, h4, h5, h6 { 
@@ -270,8 +269,6 @@ footer a:hover {
 }
 
 footer img {
-  height: 40px;
-  width: 40px;
   margin-left: 10px;
   margin-right: 10px;
   max-width: 100%;
@@ -409,6 +406,7 @@ ul img {
   position: relative;
   overflow: hidden;
   margin: auto 10px;    
+  max-width: 100%;
 }
 
 .lavaLampWithImage li a:hover, .lavaLampWithImage li a:active, .lavaLampWithImage li a:visited {
