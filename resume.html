@@ -39,6 +39,11 @@ main {
   padding: 0.5in;
   width: 8.5in;
   height: 11in;
+  grid-template-rows: 100px 400px;
+  grid-template-areas:
+        "side head1"
+        "side main1"
+        "footer footer";
   background-color: white;
   box-shadow: 0 3px 8px -3px rgba(0, 0, 0, 0.7);
   font-family: "Source Serif Pro", "Cambria", "Charter", "Georgia", sans-serif;
@@ -102,14 +107,8 @@ ul {
 .multicolumn {
   display: grid;
   gap: 2rem;
-  grid-column-start: 2;
-  grid-column-end: 4;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 100px 400px;
-  grid-template-areas:
-        "side head1"
-        "side main1"
-        "footer footer";
+  
 }
 
 .experience-container h2 {
