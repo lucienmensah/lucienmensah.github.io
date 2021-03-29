@@ -369,6 +369,7 @@ ul img {
   margin: 10px 0 0 0;
   overflow: hidden;
   float: right;
+  max-width: 100%; 
 }
 
 .lavaLampWithImage li {
