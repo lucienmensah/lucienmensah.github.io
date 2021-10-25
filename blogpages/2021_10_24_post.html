@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lucien Mensah - First Blog Post</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="blog.css" />
+	
+  <!-- modernizr enables HTML5 elements and feature detects -->
+  <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <header>
+      <div id="logo"><h1>LUCIENDMENSAH</h1></div>
+      <nav>
+        <ul class="lavaLampWithImage" id="lava_menu">
+          <li><a href="../index.html">home</a></li>
+          <li><a href="../about.html">about me</a></li>
+          <li><a href="../portfolio.html">my portfolio</a></li>
+          <li><a href="../resume.html" target="_blank" rel="noopener noreferrer">resume</a></li>
+	  <li class"current"><a href="../blog.html">blog</a></li>
+         </ul>
+      </nav>
+    </header>
+    <div id="site_content">
+      <div id="fullcontent">
+	<h1><center>Trans* Twitter Project Intro</center></h1>
+        <h2><b>Finally, Some Discussion About the Work I Do</b></h2>
+	<h3><i>Project Goals</i></h3>
+	<p>The goal of this project is to explore how Twitter users use language and neologisms to express gender freedom. I seek to examine if there is an alignment between the pronouns that people use to describe themselves and the words that they use. Because of this, with this project, I am also hoping to do some sentiment analysis of the tweets within the queries and look to see if the tweets more frequently talk about themselves or other people.</p>
+	<h3><i>Data</i></h3>
+<p>I will be pulling data from Twitter every other day, from a query of the words: "thembo", "bimbo", "himbo", "theydies", "ladies", "gentlethem", "gentlemen", "theybie", "transgender", "transwoman", and "transman". Each of these terms will be pulled in, and will be in their own csv file. An example of one of the datasets is available below:</p>
+	   <center><img src="../images/twt_five_rows.png" alt="data from trans twitter, with 5 people's screen names, user names, locations, bios, and columns with different gender options marked as yes or no" width="900" height="200"></center>
+<p>As we can see from the preview of the data, we get a user's screen_name (user name), their name (display name), location (the reason why it is included is because some users put their pronouns in their location), bio (the most popular place to put pronouns), the tweet that had the word that was queried, which in this case was "thembo", and columns that specifically denote what set of pronouns were indicated either in their bio or location. I used regular expressions specifically searching for different pronoun sets in order to create the columns that indicated what pronouns they used. I figured this would be the most benefiticial while doing the data analysis. One issue with the data is that the Twitter indiscriminately will include users that may not specifically Tweeted a certain word, but also has it in their bio or their screen name, as we see for the first person. I, however, have not removed them from my analysis because those users show example of using one of the gendered neologisms as a self-identification, which is the main point of my research. Additionally, the main reason I am using pronouns is because they are another hallmark of self identification, though, while dealing with the different words in the queries, we will be interacting with the societal implications that each word has. For example, "bimbo" being aligned with women, "himbo" with men, and "thembo" being created to align with non-binary people. There is a fine line with this research as someone may be non-binary but not use they/them pronouns or vise-versa. That is why I will be trying to stray away from making such specific alignments, but we do live in an overarching cis-centric society.</p>
+
+<p>With those thoughts in mind, there are groups of people being left out, such as people who use neopronouns and I am doing my best, as I encounter new sets, to include them in my work. It is not perfect, but for now, that is what I can do for now, but hopefully as I develop this out I will figure out the best practices.</p>
+</div>
+    </div>
+    <footer>
+	    <a href="luciendmensah@gmail.com"> <img src="../images/githubgmail.png" alt="gmail, sends email to lucien" width="40" height="40"></a>
+            <a href="https://github.com/lucienmens" target="_blank" rel="noopener noreferrer"> <img src="../images/githublogo.png" alt="github, opens a new tab" width="40" height="40"></a>
+            <a href="https://www.linkedin.com/in/lucien-mensah" target="_blank" rel="noopener noreferrer"> <img src="../images/linkedinlogo.png" alt="linkedin, opens a new tab" width="40" height="40"></a>
+      <p><a href="../index.html">home</a> | <a href="../about.html">about me</a> | <a href="../portfolio.html">my portfolio</a> | <a href="../resume.html" target="_blank" rel="noopener noreferrer">resume</a> | <a href="../blog.html">blog</a></p>
+      <p style="font-size:8px">&copy; <a href="http://www.css3templates.co.uk">2012 my portfolio two.</p>
+    </footer>
+  </div>
+  <!-- javascript at the bottom for fast page loading -->
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.easing.min.js"></script>
+  <script type="text/javascript" src="js/jquery.lavalamp.min.js"></script>
+  <script type="text/javascript" src="js/image_fade.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $("#lava_menu").lavaLamp({
+        fx: "backout",
+        speed: 700
+      });
+    });
+  </script>
+</body>
+</html>
