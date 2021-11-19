@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lucien Mensah - First Blog Post</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="blog.css" />
+	
+  <!-- modernizr enables HTML5 elements and feature detects -->
+  <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <header>
+      <div id="logo"><h1>LUCIENDMENSAH</h1></div>
+      <nav>
+        <ul class="lavaLampWithImage" id="lava_menu">
+          <li><a href="../index.html">home</a></li>
+          <li><a href="../about.html">about me</a></li>
+          <li><a href="../portfolio.html">my portfolio</a></li>
+          <li><a href="../resume.html" target="_blank" rel="noopener noreferrer">resume</a></li>
+	  <li class"current"><a href="../blog.html">blog</a></li>
+         </ul>
+      </nav>
+    </header>
+    <div id="site_content">
+      <div id="fullcontent">
+	<h1><center>Trans* Twitter Project Intro</center></h1>
+        <h2><b>An Update on the Cool Work I'm Doing!</b></h2>
+	<h3><i>Updated Project Goals</i></h3>
+	<p>The goal of this project is to explore how Twitter users use language and neologisms to express gender freedom. Some of the questions that I would like to hopefully answer are:</p>
+	<p>Is there an alignment between the pronouns that people use to describe themselves and the words that they use?</p>
+	<p>Do those that use pronoun sets outside of "he/him" and "she/her" tend to create more words to fit their identities?</p>
+	<p>What is the general sentiment of these neologisms with specific reference to those who may be outside the gender binary?</p>
+	<p>How often do people use neologisms to talk about themselves vs others?</p>
+	<p><b>Some smaller questions that I also would like to look at:</b></p>
+	<p>How many Twitter users do actually put their pronouns in their bios/location?</p>
+	<p>Is it more common to put pronouns in their bio or their location?</p>
+	<h3><i>Data Pulling Code</i></h3>
+	<p>I pull this data using Tweepy, a Python library designed specifically for interacting with Twitter. It also requires that I have Twitter Dev Access, which is something that I acquired a while ago. I start off by importing the necessary libraries - in addition to Tweepy, I need re for my regex, pandas to read the CSVs and matplotlib for visualizations.</p>
+		<code>import tweepy <br>
+		import pandas as pd <br>
+		import re <br>
+		import matplotlib.pyplot as plt <br>
+		import numpy as np <br>
+		from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator<br></code>
+	<p>After that, it is necessary to be authenticated through Twitter, and I have hidden my keys.</p>
+		<code>consumer_key = "####"<br>
+		consumer_secret = "####"<br>
+		access_token = "####"<br>
+		access_token_secret = "####"<br>
+
+		# creating the authentication object<br>
+		auth = tweepy.OAuthHandler(consumer_key, consumer_secret)<br>
+		# setting your access token and secret<br>
+		auth.set_access_token(access_token, access_token_secret)<br>
+		# creating the API object while passing in auth information<br>
+		api = tweepy.API(auth)<br>
+	<p>I set up the list of features that I will be looking for to create my dataframe, I have a list of the queries I will be searching for, and I have a dictionary that will make the process easier for looping through.</p>
+
+<code>user_features_list = ["screen_name", "name", "location", "bio", "tweet",
+                      "he/him", "she/her", "they/them",
+                      "it/its", "xe/xem", "ze/zir"]<br>
+
+query_list = ["thembo","bimbo","himbo","theydies","ladies", "gentlethem", "gentlemen", "theybie", "transgender","trans woman","trans man"]<br>
+res_dict = {}<br>
+<p>I am focusing on neologisms in English, so I set my language to English. The max number of tweets I can pull per query is 100 terms, so I set that, and then I begin a loop to search for tweets that are in my query, match the language, and match the number of tweets. I should note that with the labels "transwoman" and "transman", it is specifically spaced out in my code, but it still captures instances of "transwoman" and "transman", which is specifically marked as okay as a self-identifier but there has been discourse about which version is politically correct. My viewpoint is that one should separate the two, as "trans" is an adjective modifying "man" in the same way that "cis" is oftentime (silently) modifying man or woman. Putting the adjective and noun together may often be seen as a form of othering to differenciate a trans person from a cis person purposefully to deny their womanhood or manhood.</p>
+<code># english language tweets<br>
+language = "en"<br>
+# can set number of tweets to pull - up to 100<br>
+numTweets = 100<br>
+# calling the user_timeline function with our parameters<br>
+for query in query_list:<br>
+    res_dict[query] = api.search_tweets(q=query, lang=language, count=numTweets)<br>
+</code>
+<p>My code to search through tweets uses regex to search through a user's bio and location to see what set of pronouns they use. Right now, I am only looking for he/him, they/them, she/her, it/its, xe/xir/xem, ze/zir/zem in regards to pronouns since those are the sets that I have come across the most. As I encounter new sets of pronouns, I do my best to add them to this list. This code could also possibly use some refinement as it may make more sense to make each of the pronouns into a list and then do regex from there. All the pronouns are appended to their respective lists, and then I also have a specific list for users that do not have pronouns in their bio. From there, I am able to reference the previously created list to compile the dataframe since users that have at least one instance of a pronoun will be captured, and if a specific user uses multiple sets of pronouns, the dataframe will mark each of these. This allows for a variety of pronouns and possibly identities to be captured.</p>
+<code># cell to search through tweets<br>
+for query in query_list:<br>
+    users_df = pd.DataFrame(columns = user_features_list)<br>
+    pro_they = []<br>
+    pro_he = []<br>
+    pro_she = []<br>
+    pro_it = []<br>
+    pro_xe = []<br>
+    pro_ze = []<br>
+    no_pronouns = []<br>
+# cell to search through tweets<br>
+for query in query_list:   <br>
+    users_df = pd.DataFrame(columns = user_features_list)<br>
+    pro_they = []<br>
+    pro_he = []<br>
+    pro_she = []<br>
+    pro_it = []<br>
+    pro_xe = []<br>
+    pro_ze = []<br>
+    no_pronouns = []<br>
+    authors = []<br>
+
+    tweets = []<br>
+    for tweet in res_dict[query]: #there has to be a way to make this less redundant <br>
+        # prints the username, tweet w query, and bio description <br>
+        tweets.append(tweet.text)<br>
+        # print(tweet.user.screen_name,"Tweeted:",tweet.text,"| User Description:", tweet.user.description)<br>
+        authors.append(tweet.user.screen_name)<br>
+        # this searches for they/them<br>
+        if re.search((r'\bthey\b' or r'\bthem\b'), tweet.user.description, re.IGNORECASE):<br>
+            pro_they.append(tweet.user.screen_name) #searches for they/them<br>
+        if re.search((r'\bthey\b' or r'\bthem\b'), tweet.user.location, re.IGNORECASE):<br>
+            pro_they.append(tweet.user.screen_name) #searches for they/them<br>
+        if re.search((r'\bshe\b' or r'\bher\b'), tweet.user.description, re.IGNORECASE):<br>
+            pro_she.append(tweet.user.screen_name)<br>
+        if re.search((r'\bshe\b' or r'\bher\b'), tweet.user.location, re.IGNORECASE):<br>
+            pro_she.append(tweet.user.screen_name)<br>
+        if re.search((r'\bhe\b' or r'\bhim\b'), tweet.user.description, re.IGNORECASE):<br>
+            pro_he.append(tweet.user.screen_name)<br>
+        if re.search((r'\bhe\b' or r'\bhim\b'), tweet.user.location, re.IGNORECASE):<br>
+            pro_he.append(tweet.user.screen_name)<br>
+        if re.search((r'\bit\b' or r'\bits\b'), tweet.user.description, re.IGNORECASE):<br>
+            pro_it.append(tweet.user.screen_name)<br>
+        if re.search((r'\bit\b' or r'\bits\b'), tweet.user.location, re.IGNORECASE):<br>
+            pro_it.append(tweet.user.screen_name)<br>
+        if re.search((r'\bxe\b' or r'\bxir\b' or r'\bxem\b' or r'\bxey\b'), tweet.user.description, re.IGNORECASE):<br>
+            pro_xe.append(tweet.user.screen_name)<br>
+        if re.search((r'\bxe\b' or r'\bxir\b' or r'\bxem\b' or r'\bxey\b'), tweet.user.location, re.IGNORECASE):<br>
+            pro_xe.append(tweet.user.screen_name)<br>
+        if re.search((r'\bze\b' or r'\bzir\b' or r'\bzem\b'), tweet.user.description, re.IGNORECASE):<br>
+            pro_ze.append(tweet.user.screen_name)<br>
+        if re.search((r'\bze\b' or r'\bzir\b' or r'\bzem\b'), tweet.user.location, re.IGNORECASE):<br>
+            pro_ze.append(tweet.user.screen_name)<br>
+            #de,dem<br>
+   #people who use words like genderqueer, nb<br>
+        if re.search((r'\bnonbinary\b' or r'\bgenderqueer\b'), tweet.user.description, re.IGNORECASE):<br>
+           nbgq.append(tweet.user.screen_name)<br>
+           
+    for tweet in res_dict[query]: #this may not be necessary    <br>
+    # Create empty dict<br>
+        user_features = {}<br>
+    # Get user data<br>
+        user_features['bio'] = tweet.user.description<br>
+        user_features['screen_name'] = tweet.user.screen_name<br>
+        user_features['name'] = tweet.user.name<br>
+        user_features['tweet'] = tweet.text<br>
+        user_features['location'] = tweet.user.location<br>
+        #fills in the yeses<br>
+        if tweet.user.screen_name in pro_they:<br>
+            user_features['they/them'] = 'yes'<br>
+        if tweet.user.screen_name in pro_he:<br>
+            user_features['he/him'] = 'yes'<br>
+        if tweet.user.screen_name in pro_she:<br>
+            user_features['she/her'] = 'yes'<br>
+        if tweet.user.screen_name in pro_it:<br>
+            user_features['it/its'] = 'yes'<br>
+        if tweet.user.screen_name in pro_xe:<br>
+            user_features['xe/xem'] = 'yes'<br>
+        if tweet.user.screen_name in pro_ze:<br>
+            user_features['ze/zem'] = 'yes'<br>
+        #fills in the nos<br>
+        if tweet.user.screen_name not in pro_he:<br>
+            user_features['he/him'] = 'no'<br>
+        if tweet.user.screen_name not in pro_she:<br>
+            user_features['she/her'] = 'no'<br>
+        if tweet.user.screen_name not in pro_xe:<br>
+            user_features['xe/xem'] = 'no'<br>
+        if tweet.user.screen_name not in pro_they:<br>
+            user_features['they/them'] = 'no'<br>
+        if tweet.user.screen_name not in pro_it:<br>
+            user_features['it/its'] = 'no'<br>
+        if tweet.user.screen_name not in pro_ze:<br>
+            user_features['ze/zem'] = 'no'<br>
+        # concat the dfs<br>
+        user = pd.DataFrame(user_features, index = [0])<br>
+        users_df = pd.concat([users_df, user], ignore_index = True)<br>
+    date_string = '11_18'<br>
+    filename = '%s_%s.csv' % (query, date_string)   <br>
+    users_df.to_csv(filename, encoding='utf-8', index=False)<br>
+
+	<h3><i>Data</i></h3>
+<p>I will be pulling data from Twitter every other day, from a query of the words: "thembo", "bimbo", "himbo", "theydies", "ladies", "gentlethem", "gentlemen", "theybie", "transgender", "transwoman", and "transman". Each of these terms will be pulled in, and will be in their own csv file. An example of one of the datasets is available below:</p>
+	   <center><img src="../images/twt_five_rows.png" alt="data from trans twitter, with 5 people's screen names, user names, locations, bios, and columns with different gender options marked as yes or no" width="1000" height="350"></center>
+<p>As we can see from the preview of the data, we get a user's screen_name (user name), their name (display name), location (the reason why it is included is because some users put their pronouns in their location), bio (the most popular place to put pronouns), the tweet that had the word that was queried, which in this case was "thembo", and columns that specifically denote what set of pronouns were indicated either in their bio or location. I used regular expressions specifically searching for different pronoun sets in order to create the columns that indicated what pronouns they used. I figured this would be the most benefiticial while doing the data analysis. One issue with the data is that the Twitter indiscriminately will include users that may not specifically Tweeted a certain word, but also has it in their bio or their screen name, as we see for the first person. I, however, have not removed them from my analysis because those users show example of using one of the gendered neologisms as a self-identification, which is the main point of my research. Additionally, the main reason I am using pronouns is because they are another hallmark of self identification, though, while dealing with the different words in the queries, we will be interacting with the societal implications that each word has. For example, "bimbo" being aligned with women, "himbo" with men, and "thembo" being created to align with non-binary people. There is a fine line with this research as someone may be non-binary but not use they/them pronouns or vise-versa. That is why I will be trying to stray away from making such specific alignments, but we do live in an overarching cis-centric society.</p>
+
+<h3><i>Data Analysis</i></h3>
+<p>The next step is to compile the created dataframes together throughout the dates that have been collected. In order to make my findings statistically significant, I have about 1,000 tweets per query, which is all Tweeters - those who don't have pronouns in their bios and those that do. Reminder that I have 11 queries, which puts us at 11,000 data points. Wow! Since I want to look specifically at users with pronouns in their bios, that will likely remove about half of the data, but before we do that, we can answer one of my questions by looking at the number of people who have pronouns in their bios compared to those who don't.</p>
+</div>
+    </div>
+    <footer>
+	    <a href="luciendmensah@gmail.com"> <img src="../images/githubgmail.png" alt="gmail, sends email to lucien" width="40" height="40"></a>
+            <a href="https://github.com/lucienmens" target="_blank" rel="noopener noreferrer"> <img src="../images/githublogo.png" alt="github, opens a new tab" width="40" height="40"></a>
+            <a href="https://www.linkedin.com/in/lucien-mensah" target="_blank" rel="noopener noreferrer"> <img src="../images/linkedinlogo.png" alt="linkedin, opens a new tab" width="40" height="40"></a>
+      <p><a href="../index.html">home</a> | <a href="../about.html">about me</a> | <a href="../portfolio.html">my portfolio</a> | <a href="../resume.html" target="_blank" rel="noopener noreferrer">resume</a> | <a href="../blog.html">blog</a></p>
+      <p style="font-size:8px">&copy; <a href="http://www.css3templates.co.uk">2012 my portfolio two.</p>
+    </footer>
+  </div>
+  <!-- javascript at the bottom for fast page loading -->
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.easing.min.js"></script>
+  <script type="text/javascript" src="js/jquery.lavalamp.min.js"></script>
+  <script type="text/javascript" src="js/image_fade.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $("#lava_menu").lavaLamp({
+        fx: "backout",
+        speed: 700
+      });
+    });
+  </script>
+</body>
+</html>
