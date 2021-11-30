@@ -53,13 +53,53 @@
 <center><img src="../images/twt_5.png" alt="" width="1000" height="350"></center>
 <center><img src="../images/twt_6.png" alt="" width="1000" height="350"></center>
 
-	<h3><i>Data</i></h3>
+	<h3><i>Data Examination</i></h3>
 <p>I will be pulling data from Twitter every other day, from a query of the words: "thembo", "bimbo", "himbo", "theydies", "ladies", "gentlethem", "gentlemen", "theybie", "transgender", "transwoman", and "transman". Each of these terms will be pulled in, and will be in their own csv file. An example of one of the datasets is available below:</p>
 	   <center><img src="../images/twt_five_rows.png" alt="data from trans twitter, with 5 people's screen names, user names, locations, bios, and columns with different gender options marked as yes or no" width="1000" height="350"></center>
 <p>As we can see from the preview of the data, we get a user's screen_name (user name), their name (display name), location (the reason why it is included is because some users put their pronouns in their location), bio (the most popular place to put pronouns), the tweet that had the word that was queried, which in this case was "thembo", and columns that specifically denote what set of pronouns were indicated either in their bio or location. I used regular expressions specifically searching for different pronoun sets in order to create the columns that indicated what pronouns they used. I figured this would be the most benefiticial while doing the data analysis. One issue with the data is that the Twitter indiscriminately will include users that may not specifically Tweeted a certain word, but also has it in their bio or their screen name, as we see for the first person. I, however, have not removed them from my analysis because those users show example of using one of the gendered neologisms as a self-identification, which is the main point of my research. Additionally, the main reason I am using pronouns is because they are another hallmark of self identification, though, while dealing with the different words in the queries, we will be interacting with the societal implications that each word has. For example, "bimbo" being aligned with women, "himbo" with men, and "thembo" being created to align with non-binary people. There is a fine line with this research as someone may be non-binary but not use they/them pronouns or vise-versa. That is why I will be trying to stray away from making such specific alignments, but we do live in an overarching cis-centric society.</p>
 
 <h3><i>Data Analysis</i></h3>
 <p>The next step is to compile the created dataframes together throughout the dates that have been collected. In order to make my findings statistically significant, I have about 1,000 tweets per query, which is all Tweeters - those who don't have pronouns in their bios and those that do. Reminder that I have 11 queries, which puts us at 11,000 data points. Wow! Since I want to look specifically at users with pronouns in their bios, that will likely remove about half of the data, but before we do that, we can answer one of my questions by looking at the number of people who have pronouns in their bios compared to those who don't.</p>
+<center><img src="../images/twt_7.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_8.png" alt="" width="1000" height="350"></center>
+<p>Seeing that most people don't use pronouns in their bio for tweeting a word as general as "transgender" is not surprising. What would be interesting to look at is if there is the same thing with different groups. "Transgender" would be the control and "trans man" and "trans woman" would be my differing variable. Let's compile these dataframes, add a pronouns column, and then visualize this distribution.</p>
+
+<center><img src="../images/twt_9.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_10.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_11.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_12.png" alt="" width="1000" height="350"></center>
+<p>So, we see significantly less tweets in "trans man" than "trans woman" and "transgender", BUT the amount of people using pronouns is not that different than those terms. It would likely be helpful to look at the porpotional differences between them. However, removing people who don't have pronouns would lessen our dataset by more than half, but I still believe my findings would be statistically significant. Let's take a look at the other terms.</p>
+
+<center><img src="../images/twt_13.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_14.png" alt="" width="1000" height="350"></center>
+
+<p><b>Whoa! More people have pronouns in their bio when they use the word himbo! Let's pause here and look at the distribution on their pronouns!</b></p>
+<center><img src="../images/twt_15.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_16.png" alt="" width="1000" height="350"></center>
+<p>Heyyyy! This is kind of proving my hypothesis, that people's pronouns do kind of align with the word that they use, since himbo has the 'him' suffix, the assumption is that we would expect more he/him users, and that's true! At least, so far. Additionally, I like this distribution of the value counts because it also visualizes people with more than one set of pronouns. I am open to more visualizations that may also show the distribution of pronouns (maybe a pie graph?) Let's do this same thing for thembo and bimbo.</p>
+
+<center><img src="../images/twt_17.png" alt="" width="1000" height="350"></center>
+<p>Omg... and we see the same thing for they/them and thembo. Most of the people tweeting that word do also use they/them or a combination of another pronoun set with they.</p>
+
+<center><img src="../images/twt_18.png" alt="" width="1000" height="350"></center>
+<p>Whoa... So far, there is an alignment between the pronouns and the suffix/societal implications that a word has. Now, the deeper question is whether this is being used to talk about themselves or a group that they are a part of, or whether this is being used to talk about other people. But for now, this is pretty significant. Now, let's go ahead and see if we find the same kind of thing for the other queried words.</p>
+
+<center><img src="../images/twt_19.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_20.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_21.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_22.png" alt="" width="1000" height="350"></center>
+<p>Overall, what we can tell from this is that words with specific gender morphemes tend to appeal more to people who reside within communities where it is the norm to indicate your pronouns to be more inclusive. This is cool! Since my next question is wondering who people are referring to when tweeting, let's look at some of the other popular words that are being tweeted with the query.</p>
+
+<center><img src="../images/twt_23.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/trans_word_cloud.png" alt="" width="1000" height="350"></center>
+<p>Seems like there's a lot of words that are related that are somewhat political and talking about, since "people" is a popular one, as well as "transgender people". Maybe, though, "trans" is being used in reference to themselves.</p>
+
+<center><img src="../images/twt_24.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/transwoman_word_cloud.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_2.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_2.png" alt="" width="1000" height="350"></center>
+<center><img src="../images/twt_2.png" alt="" width="1000" height="350"></center>
+
 </div>
     </div>
     <footer>
