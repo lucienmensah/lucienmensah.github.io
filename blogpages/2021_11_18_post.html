@@ -42,9 +42,9 @@
 	<p>Is it more common to put pronouns in their bio or their location?</p>
 	<h3><i>Data Pulling Code</i></h3>
 	<p>I pull this data using Tweepy, a Python library designed specifically for interacting with Twitter. It also requires that I have Twitter Dev Access, which is something that I acquired a while ago. I start off by importing the necessary libraries - in addition to Tweepy, I need re for my regex, pandas to read the CSVs and matplotlib for visualizations.</p>
-		<center><img src="../images/twt_1.png" alt="code that imports pandas, numpy, wordcloud" width="1500" height="50"></center>
+		<center><img src="../images/twt_1.png" alt="code that imports pandas, numpy, wordcloud" width="900" height="150"></center>
 	<p>After that, it is necessary to be authenticated through Twitter, and I have hidden my keys.</p>
-		<<center><img src="../images/twt_2.png" alt="" width="1000" height="350"></center>
+		<center><img src="../images/twt_2.png" alt="" width="1000" height="350"></center>
 	<p>I set up the list of features that I will be looking for to create my dataframe, I have a list of the queries I will be searching for, and I have a dictionary that will make the process easier for looping through.</p>
 <center><img src="../images/twt_3.png" alt="" width="1000" height="350"></center>
 <p>I am focusing on neologisms in English, so I set my language to English. The max number of tweets I can pull per query is 100 terms, so I set that, and then I begin a loop to search for tweets that are in my query, match the language, and match the number of tweets. I should note that with the labels "transwoman" and "transman", it is specifically spaced out in my code, but it still captures instances of "transwoman" and "transman", which is specifically marked as okay as a self-identifier but there has been discourse about which version is politically correct. My viewpoint is that one should separate the two, as "trans" is an adjective modifying "man" in the same way that "cis" is oftentime (silently) modifying man or woman. Putting the adjective and noun together may often be seen as a form of othering to differenciate a trans person from a cis person purposefully to deny their womanhood or manhood.</p>
